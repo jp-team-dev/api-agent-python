@@ -1,0 +1,7 @@
+Aplique as migrations para criar as tabelas no banco:
+
+    "docker compose exec db alembic upgrade head"
+
+    $ docker compose exec backend alembic upgrade head
+
+    # Isso vai criar a tabela "card" no banco de dados.

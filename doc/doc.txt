@@ -1,0 +1,83 @@
+# Atalhos
+
+
+  CTRL + '  => Terminal active, terminais ativos
+    {
+      "key": "ctrl+'",
+      "command": "workbench.action.quickOpenTerm"
+    }
+
+  CTRL + SHIFT + '  => Entra no Chat
+    {
+      "key": "ctrl+'",
+      "command": "chatgpt.sidebarView.focus"
+    }
+
+  CTRL + SHIFT + DownArrow  => Entra no Terminal
+    {
+      "key": "ctrl+shift+down",
+      "command": "editor.action.insertCursorBelow",
+      "when": "editorTextFocus"
+    }
+
+  CTRL + SHIFT + UpArrow => Entra no Código
+    {
+      "key": "ctrl+shift+up",
+      "command": "editor.action.insertCursorAbove",
+      "when": "editorTextFocus"
+    }
+
+  CTRL + SHIFT + P => Paleta de Comandos
+    {
+      "key": "ctrl+shift+p",
+      "command": "workbench.action.showCommands"
+    }
+
+  CTRL + SHIFT + T => Abre novo Terminal
+  {
+    "key": "ctrl+shift+alt+t",
+    "command": "workbench.action.terminal.chat.focusMostRecentChatTerminal",
+    "when": "inChat"
+  }
+
+# Dica de produtividade VSCode
+
+  - Para alternar entre o editor de código e o chat Copilot sem mouse:
+    - Defina um atalho para "Copilot Chat: Focus on Chat View" (ex: Ctrl+Alt+C) em Keyboard Shortcuts.
+    - Use Ctrl+1 para voltar ao editor de código.
+
+  Assim, você alterna entre chat e código só com o teclado!
+
+# Teste feitos via "Swagger UI"
+
+  http://localhost:8000/docs#/
+
+# Openai
+
+	# tokenizer
+
+		https://platform.openai.com/tokenizer
+			
+	# openai
+
+		https://openai.com/pt-BR/
+		
+	# openai platform
+
+		https://platform.openai.com/chat
+		
+	# openai billing
+
+		https://platform.openai.com/settings/organization/billing/overview
+
+# Pydantic
+
+	https://ai.pydantic.dev/  
+
+# Parei...
+
+    Aula 02 - 00:03:45
+
+
+Pode me ajudar a fazer esse projeto rodar, com esse script ja'pronto no arquivo "main.py"?
+Só pra você saber já criei o banco de dados "agent" localhost

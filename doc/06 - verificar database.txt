@@ -1,0 +1,35 @@
+# Verificar se o banco de dados está rodando
+
+    $ docker ps
+
+    # Retorna a lista de containers ativos:
+
+        (.venv) hell@hell:~/projects/python/api-stepbystep-python$ docker ps
+        CONTAINER ID   IMAGE                           COMMAND                  CREATED         STATUS         PORTS                                         NAMES
+        4a21a034d64d   api-stepbystep-python-backend   "uvicorn app.main:ap…"   9 minutes ago   Up 8 minutes   0.0.0.0:8000->8000/tcp, [::]:8000->8000/tcp   api-stepbystep-python-backend-1
+        1dd5d62478ac   postgres:15                     "docker-entrypoint.s…"   9 minutes ago   Up 9 minutes   0.0.0.0:5433->5432/tcp, [::]:5433->5432/tcp   api-stepbystep-python-db-1
+
+# Entrar no banco via
+
+    $ docker exec -it api-stepbystep-python-db-1 psql -U postgres -d stepbystep
+
+    # Retorna o prompt do psql:
+
+        (.venv) hell@hell:~/projects/python/api-stepbystep-python$ docker exec -it api-stepbystep-python-db-1 psql -U postgres -d stepbystep
+        psql (15.16 (Debian 15.16-1.pgdg13+1))
+        Type "help" for help.
+
+        stepbystep=#
+
+# Listar todas as tabelas
+
+    $ \dt
+
+    # Retorna a lista de tabelas:
+
+        stepbystep=# \dt
+                   List of relations
+         Schema |      Name       | Type  |  Owner
+        --------+-----------------+-------+----------
+         public | alembic_version | table | postgres
+        (1 row)

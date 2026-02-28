@@ -1,0 +1,12 @@
+01 - Run python files
+
+    $ python app/test_learning_api.py
+    ou
+    $ PYTHONPATH="$(pwd)" python3 -m pytest app/test_learning_api.py
+
+
+     # Aplicar na janela atual do VSCode IDE
+
+        CTRL + SHIFT + P
+
+            Developer: Reload Window

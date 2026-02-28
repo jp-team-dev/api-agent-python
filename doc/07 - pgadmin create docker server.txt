@@ -1,0 +1,30 @@
+Criei aqui, agora dentro de "Servers" existem dois "local" e "docker"
+
+Adicione uma nova conexão/servidor no pgAdmin com:
+
+    docker
+
+        Host: localhost
+        Porta: 5433
+        Usuário: postgres
+        Senha: 198870
+        Banco: stepbystep
+
+Agora apareceram as informações, tenho que fazer alguma alteração no código, depois disso?
+
+
+    docker
+    
+        Host: localhost
+        Porta: 5433
+        Usuário: postgres
+        Senha: 198870
+        Banco: stepbystep
+
+    localhost
+    
+        Host: localhost
+        Porta: 5433
+        Usuário: postgres
+        Senha: 198870
+        Banco: postgres

@@ -1,0 +1,44 @@
+01 - Suba os containers (se já subiu, pode pular):
+
+    # REFAZ todo o fluxo, desdo o ZERO
+
+        # Perfeito, "$ make up" já preparou tudo (rebuild + up), então não precisa rerun nenhum dos outros comandos a menos que mude o "Dockerfile/dependências" novamente.
+
+            $ make up
+            $ make up --build
+            ou
+            $ docker compose up -d
+            $ docker compose build backend
+
+02 - Aplique as migrations para criar as tabelas no banco:
+
+    # Aplica apenas as migrations
+
+        # Se for aplicar "migrations" daqui pra frente, basta rodar "$ make migrate" agora que o serviço está rodando; para reiniciar só o "backend" depois de mudanças de código, "$ docker compose up -d" já basta.
+            
+            $ make migrate
+            ou
+            $ docker compose exec backend alembic upgrade head
+
+03 - Aplicar os "TESTS" Pare o backend, parar todo o fluxo, até o ZERO
+    
+    # Se quiser, pode manter o mesmo container do backend rodando também, não atrapalha.
+    
+    # Pare o backend (make down) e não precisa reabrir o .venv principal agora; você pode manter o Docker parado, porque os testes usam o banco diretamente (não precisam do backend rodando).
+    
+        $ make down
+
+    # Mas o Postgres deve estar ativo: rode docker compose up -d db para subir só o banco.
+    
+        $ docker compose up -d db
+
+    # export e make test
+
+        $ export TEST_DATABASE_URL="postgresql://postgres:198870@localhost:5433/stepbystep_test"
+        $ make test
+
+04 - Run test
+
+    # O "make test", já inicializa todas as dependências para o perfeito funcionamento dos testes
+
+        $ make test

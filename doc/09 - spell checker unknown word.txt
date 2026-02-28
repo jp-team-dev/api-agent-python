@@ -1,0 +1,162 @@
+# Spell Checker
+
+    # Pra aplicar todas as configurações depóis de criar 
+    
+        "FLUTTER => "cspell.json, settings.json"
+        "PYTHON => "cspell.json, settings.json"
+
+            CTRL + SHOFT + P -> Developer: Reload Windows
+
+    # flutter -> cspell.json -> colocar o arquvo aqui dentro
+
+        /home/hell/projects/flutter/app-stepbystep-flutter/cspell.json
+
+        # A Adicionar essas linhas dentro do arquivo "settings.json"
+
+            /home/hell/projects/flutter/app-stepbystep-flutter/.vscode/settings.json
+
+                {
+                "dart.flutterSdkPath": ".fvm/versions/3.41.2",
+                "cSpell.configFile": "${workspaceFolder}/cspell.json",
+                "cSpell.note":
+                    "Configura o spell checker para usar o glossário local (cspell.json) em todos os projetos deste workspace."
+                }
+
+    # python -> cspell.json -> colocar o arquvo aqui dentro
+
+        /home/hell/projects/python/api-stepbystep-python/cspell.json
+
+        # A Adicionar essas linhas dentro do arquivo "settings.json"
+
+            /home/hell/projects/python/api-stepbystep-python/.vscode/settings.json
+
+                {
+                    "cSpell.words": [
+                        "selectinload"
+                    ],
+                    "cSpell.configFile": "${workspaceFolder}/cspell.json",
+                    "cSpell.note": "Configura o spell checker para usar o glossário local (cspell.json) em todos os projetos deste workspace."
+                }
+
+
+    # Criar um arquivo com o script para varrer todas as palavras que estão sendo repoprtadas pelo Spell Checker, nome do arquivo será esse "update-cspell.sh"
+
+        /home/hell/projects/flutter/app-stepbystep-flutter/scripts/update-cspell.sh
+
+        # File
+
+            #!/usr/bin/env bash
+            set -euo pipefail
+
+            ROOT_DIR="$(cd "$(dirname "$0")/.." && pwd)"
+            CSPELL_CONFIG="$ROOT_DIR/cspell.json"
+
+            if [[ ! -f "$CSPELL_CONFIG" ]]; then
+            echo "cspell.json não encontrado em $ROOT_DIR" >&2
+            exit 1
+            fi
+
+            TMP="$(mktemp)"
+            trap 'rm -f "$TMP"' EXIT
+
+            # Executa cspell e captura somente as palavras marcadas (uma por linha)
+            npx -y cspell --config "$CSPELL_CONFIG" --no-progress --no-summary --words-only "${@:-.}" | sort -u > "$TMP"
+
+            if [[ ! -s "$TMP" ]]; then
+            echo "Nenhuma palavra nova detectada pelo cspell."
+            exit 0
+            fi
+
+            updated=false
+
+            while IFS= read -r word; do
+            if grep -qF "\"$word\"" "$CSPELL_CONFIG"; then
+                continue
+            fi
+            # Insere a palavra dentro da lista `words`
+            python - <<PY
+            from pathlib import Path
+            import json
+
+            config_path = Path("$CSPELL_CONFIG")
+            data = json.loads(config_path.read_text())
+            words = set(data.get("words", []))
+            words.add("$word")
+            data["words"] = sorted(words)
+            config_path.write_text(json.dumps(data, indent=2, ensure_ascii=False) + "\n")
+            PY
+            updated=true
+            done < "$TMP"
+
+            if [[ "$updated" == true ]]; then
+            echo "cspell.json atualizado."
+            else
+            echo "Todas as palavras já estavam presentes."
+            fi
+
+        # Rodar o arquivo no terminal, na rais do projeto "flutter" e "python"
+
+            $ cd /home/hell/projects/flutter/app-stepbystep-flutter
+            $ cd /home/hell/projects/python/api-stepbystep-python
+            
+            $ ./scripts/update-cspell.sh
+
+            # Aplicar na janela atual do VSCode IDE
+
+                CTRL + SHIFT + P
+
+                    Developer: Reload Window
+
+
+    # Criar um arquvio "cspell.json" e colocar todas essas sentenças abaixo
+
+{
+  "version": "0.2",
+  "language": "en",
+  "words": [
+    "FastAPI",
+    "Pydantic",
+    "pydentic",
+    "SQLModel",
+    "SQLAlchemy",
+    "uvicorn",
+    "psycopg2",
+    "alembic",
+    "Module",
+    "Lesson",
+    "Card",
+    "sensory",
+    "ConfigDict",
+    "from_attributes",
+    "selectinload",
+    "get_module",
+    "order_by",
+    "Query",
+    "List",
+    "crud",
+    "redis",
+    "doc",
+    "API",
+    "card",
+    "lessons",
+    "modules"
+  ],
+  "ignorePaths": [
+    "**/node_modules/**",
+    "**/.git/**",
+    "**/build/**",
+    "**/.idea/**",
+    "**/.vscode/**"
+  ],
+  "ignoreRegExpList": [
+    "/Module\\.lessons/",
+    "/Lesson\\.cards/",
+    "/Module\\.order/",
+    "/Module\\.id/"
+  ],
+  "ignoreWords": [
+    "StepByStep"
+  ],
+  "flagWords": [],
+  "enabled": true
+}

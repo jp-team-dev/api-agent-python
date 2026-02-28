@@ -1,0 +1,22 @@
+Solução recomendada:
+
+Pare tudo e suba novamente, aguardando o banco iniciar:
+
+    $ docker compose down -v
+    $ docker compose up -d
+
+Aguarde 10-20 segundos para o banco estar pronto.
+
+    Rode:
+
+        $ docker compose logs db
+
+    E aguarde a mensagem "database system is ready to accept connections" para garantir que o banco está pronto para aceitar conexões. Depois disso, tente acessar a aplicação novamente.
+
+Verifique se aparece "database system is ready to accept connections".
+
+    Só então rode:
+
+        $ docker compose up backend
+        ou
+        $ docker compose restart backend

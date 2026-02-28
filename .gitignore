@@ -17,7 +17,7 @@ build/
 *.mo
 *.swp
 *.swo
-doc/
+doc/key.txt
 
 # VSCode/IDE
 .vscode/

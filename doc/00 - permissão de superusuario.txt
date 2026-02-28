@@ -1,0 +1,11 @@
+# Permissão ao seu usuário
+    
+    # (Opcional, mas recomendado) Dê permissão ao seu usuário para rodar docker sem sudo:
+
+        $ sudo usermod -aG docker $USER
+
+        # Depois, faça logout/login ou rode: newgrp docker
+
+            $ newgrp docker
+        
+                # Assim, você não precisará mais usar sudo para docker compose.

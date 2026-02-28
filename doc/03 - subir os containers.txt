@@ -1,0 +1,57 @@
+Suba os containers (se já subiu, pode pular):
+
+    $ docker compose up -d
+    ou
+    $ make up
+
+# Isso vai subir o banco de dados e o pgadmin.
+
+# O pgadmin vai ficar disponível em http://localhost:8080, com usuário "
+
+# Verifique se o banco de dados está rodando corretamente, acessando o pgadmin e conectando-se ao banco.
+
+    1. Listar containers ativos
+
+        $ docker ps
+
+    2. Ver todos os containers (inclusive parados)
+
+        $ docker ps -a
+
+    3. Testar conexão direto no container
+
+        $ docker exec -it db psql -U postgres -d stepbystep
+
+    4. Logs do container
+
+        $ docker logs db
+
+    5. Remover containers parados
+
+        $ docker rm $(docker ps -a -f status=exited -q)
+
+    6. Parar os containers
+    
+        $ docker compose down
+
+    7. Como remover containers no estado Created
+    
+        $ docker rm $(docker ps -a -f status=created -q)
+
+        ou
+
+        $ docker rm app-stepbystep-flutter-backend-1
+        $ docker rm app-stepbystep-flutter-db-1
+
+    8.Depois da limpeza
+        
+        # Suba novamente os serviços do zero:
+        
+            $ docker compose up -d
+
+            # Returna a lista de containers ativos:
+
+                (.venv) hell@hell:~/projects/python/api-stepbystep-python$ docker ps -a
+                CONTAINER ID   IMAGE                           COMMAND                  CREATED         STATUS         PORTS                                         NAMES
+                0f132b324234   api-stepbystep-python-backend   "uvicorn app.main:ap…"   6 seconds ago   Up 5 seconds   0.0.0.0:8000->8000/tcp, [::]:8000->8000/tcp   api-stepbystep-python-backend-1
+                a169a3c89fed   postgres:15                     "docker-entrypoint.s…"   6 seconds ago   Up 5 seconds   0.0.0.0:5433->5432/tcp, [::]:5433->5432/tcp   api-stepbystep-python-db-1
