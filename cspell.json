@@ -1,0 +1,54 @@
+{
+  "version": "0.2",
+  "language": "en",
+  "words": [
+    "FastAPI",
+    "Pydantic",
+    "pydentic",
+    "SQLModel",
+    "SQLAlchemy",
+    "uvicorn",
+    "psycopg2",
+    "alembic",
+    "Module",
+    "Lesson",
+    "Card",
+    "sensory",
+    "ConfigDict",
+    "from_attributes",
+    "selectinload",
+    "get_module",
+    "order_by",
+    "Query",
+    "List",
+    "crud",
+    "redis",
+    "doc",
+    "API",
+    "card",
+    "lessons",
+    "modules",
+    "dotenv",
+    "pydantic",
+    "pydantic_ai",
+    "logfire"
+  ],
+  "ignorePaths": [
+    "**/node_modules/**",
+    "**/.git/**",
+    "**/build/**",
+    "**/.idea/**",
+    "**/.vscode/**"
+  ],
+  "ignoreRegExpList": [
+    "/Module\\.lessons/",
+    "/Lesson\\.cards/",
+    "/Module\\.order/",
+    "/Module\\.id/"
+  ],
+  "ignoreWords": [
+    "StepByStep"
+  ],
+  "flagWords": [],
+  "enabled": true
+}
